@@ -6,10 +6,6 @@ on:
   # Run manually from the Actions tab
   workflow_dispatch:
 
-env:
-  TAGS: |
-    ${{ secrets.DOCKER_ACR_REGISTRY }}/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/},
-    quay.io/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/}
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -30,6 +26,9 @@ jobs:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_TOKEN }}
+      - name: Set Tags
+        run: echo "${{ secrets.DOCKER_ACR_REGISTRY }}/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/}, \
+                   quay.io/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Build and push
         id: build-image
         uses: docker/build-push-action@v3
