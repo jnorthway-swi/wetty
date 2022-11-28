@@ -33,7 +33,6 @@ jobs:
         id: build-image
         uses: docker/build-push-action@v3
         with:
-          file: /11/debian/stretch/Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.TAGS }}
           push: false
