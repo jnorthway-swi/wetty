@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_TOKEN }}
       - name: Set Tags
-        run: echo "TAGS=\"${{ secrets.DOCKER_ACR_REGISTRY }}/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/}, \
+        run: echo "TAGS=\"${{ secrets.DOCKER_ACR_REGISTRY }}/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/},
                    quay.io/swi-infra/jenkins-ssh-agent:${GITHUB_REF##*/}\"" >> $GITHUB_ENV
       - name: Build and push
         id: build-image
